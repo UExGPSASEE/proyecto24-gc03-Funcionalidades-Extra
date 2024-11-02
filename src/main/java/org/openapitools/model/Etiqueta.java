@@ -9,6 +9,7 @@ import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.openapitools.modelDB.EtiquetaDB;
 
 
 import java.util.*;
@@ -40,6 +41,11 @@ public class Etiqueta {
   public Etiqueta nombre(String nombre) {
     this.nombre = nombre;
     return this;
+  }
+
+  public Etiqueta(EtiquetaDB etiquetaDB) {
+    this.nombre = etiquetaDB.getNombre();
+    this.idEtiqueta = etiquetaDB.getId();
   }
 
   /**

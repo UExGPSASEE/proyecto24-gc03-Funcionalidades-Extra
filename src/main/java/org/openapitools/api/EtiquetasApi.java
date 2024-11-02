@@ -106,7 +106,6 @@ public interface EtiquetasApi {
 
     }
 
-
     /**
      * POST /etiquetas/contenido/{id_de_contenido} : Asocia etiquetas a un contenido.
      *
