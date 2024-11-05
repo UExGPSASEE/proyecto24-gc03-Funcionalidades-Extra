@@ -1,40 +1,26 @@
 package org.openapitools.api;
 
 import org.openapitools.model.Etiqueta;
-
-
+import org.openapitools.services.EtiquetaDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-25T20:23:24.369695700+02:00[Europe/Madrid]", comments = "Generator version: 7.9.0")
 @Controller
-@RequestMapping("${openapi.aPIFuncionalidadesExtra.base-path:/StreamHub}")
+@RequestMapping("${openapi.aPIUsuarios.base-path:/StreamHub}")
 public class EtiquetasApiController implements EtiquetasApi {
-
+    private final EtiquetaDBService etiquetaDBService;
     private final NativeWebRequest request;
 
     @Autowired
-    public EtiquetasApiController(NativeWebRequest request) {
+    public EtiquetasApiController(EtiquetaDBService etiquetaDBService, NativeWebRequest request) {
+        this.etiquetaDBService = etiquetaDBService;
         this.request = request;
     }
 
@@ -43,4 +29,56 @@ public class EtiquetasApiController implements EtiquetasApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<List<Etiqueta>> etiquetasGet() {
+        List<Etiqueta> etiquetas = etiquetaDBService.findAllEtiquetas();
+        return ResponseEntity.ok(etiquetas);
+    }
+
+    @Override
+    public ResponseEntity<Etiqueta> etiquetasIdDeEtiquetaGet(Integer id) {
+        Optional<Etiqueta> etiquetaOptional = etiquetaDBService.findEtiquetaById(id);
+
+		// Return 200 with the Etiqueta data
+		// Return 404 if not found
+		return etiquetaOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @Override
+    public ResponseEntity<Void> etiquetasPost(Etiqueta etiqueta) {
+        // Call the service to save the new Etiqueta
+        boolean isCreated = etiquetaDBService.createEtiqueta(etiqueta);
+
+        if (isCreated) {
+            // Return 201 Created response
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } else {
+            // Handle cases where creation failed (e.g., due to validation)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<Void> etiquetasIdDeEtiquetaDelete(Integer id) {
+        // Call the service to delete the etiqueta by ID
+        boolean isDeleted = etiquetaDBService.deleteEtiquetaById(id);
+
+        if (isDeleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 No Content
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 Not Found
+        }
+    }
+
+    @Override
+    public ResponseEntity<Void> etiquetasIdDeEtiquetaPut(Integer id, Etiqueta etiqueta) {
+        // Call the service to update the etiqueta
+        boolean isUpdated = etiquetaDBService.updateEtiqueta(id, etiqueta);
+
+        if (isUpdated) {
+            return new ResponseEntity<>(HttpStatus.OK); // 200 OK
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 Not Found
+        }
+    }
 }

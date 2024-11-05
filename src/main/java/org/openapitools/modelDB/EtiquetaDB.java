@@ -11,8 +11,6 @@ public class EtiquetaDB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column (name = "production_year")
     private String nombre;
 
     public EtiquetaDB() {
