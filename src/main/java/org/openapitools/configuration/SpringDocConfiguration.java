@@ -9,6 +9,7 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class SpringDocConfiguration {
@@ -23,5 +24,10 @@ public class SpringDocConfiguration {
                                 .version("1.0.0")
                 )
         ;
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

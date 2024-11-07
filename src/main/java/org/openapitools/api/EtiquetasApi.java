@@ -37,226 +37,138 @@ import javax.annotation.Generated;
 @Tag(name = "Etiquetas", description = "Operaciones relacionadas con las etiquetas.")
 public interface EtiquetasApi {
 
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
+	default Optional<NativeWebRequest> getRequest() {
+		return Optional.empty();
+	}
 
-    /**
-     * DELETE /etiquetas/contenido/{id_de_contenido} : Quita etiquetas de un contenido.
-     *
-     * @param idDeContenido  (required)
-     * @return Etiquetas quitadas correctamente. (status code 200)
-     */
-    @Operation(
-        operationId = "etiquetasContenidoIdDeContenidoDelete",
-        summary = "Quita etiquetas de un contenido.",
-        tags = { "Etiquetas" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Etiquetas quitadas correctamente.")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/etiquetas/contenido/{id_de_contenido}"
-    )
-    
-    default ResponseEntity<Void> etiquetasContenidoIdDeContenidoDelete(
-        @Parameter(name = "id_de_contenido", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_contenido") Integer idDeContenido
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	/**
+	 * DELETE /etiquetas/contenido/{id_de_contenido} : Quita etiquetas de un contenido.
+	 *
+	 * @param idDeContenido (required)
+	 * @return Etiquetas quitadas correctamente. (status code 200)
+	 */
+	@Operation(operationId = "etiquetasContenidoIdDeContenidoDelete", summary = "Quita etiquetas de un contenido.", tags = {"Etiquetas"}, responses = {@ApiResponse(responseCode = "200", description = "Etiquetas quitadas correctamente.")})
+	@RequestMapping(method = RequestMethod.DELETE, value = "/etiquetas/contenido/{id_de_contenido}")
 
-    }
+	default ResponseEntity<Void> etiquetasContenidoIdDeContenidoDelete(@Parameter(name = "id_de_contenido", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_contenido") Integer idDeContenido) {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+	}
 
 
-    /**
-     * GET /etiquetas/contenido/{id_de_contenido} : Devuelve las etiquetas asociadas a un contenido.
-     *
-     * @param idDeContenido  (required)
-     * @return Lista de etiquetas asociadas al contenido. (status code 200)
-     */
-    @Operation(
-        operationId = "etiquetasContenidoIdDeContenidoGet",
-        summary = "Devuelve las etiquetas asociadas a un contenido.",
-        tags = { "Etiquetas" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Lista de etiquetas asociadas al contenido.", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Etiqueta.class)))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/etiquetas/contenido/{id_de_contenido}",
-        produces = { "application/json" }
-    )
-    
-    default ResponseEntity<List<Etiqueta>> etiquetasContenidoIdDeContenidoGet(
-        @Parameter(name = "id_de_contenido", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_contenido") Integer idDeContenido
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"id_etiqueta\" : 0, \"nombre\" : \"nombre\" }, { \"id_etiqueta\" : 0, \"nombre\" : \"nombre\" } ]";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	/**
+	 * GET /etiquetas/contenido/{id_de_contenido} : Devuelve las etiquetas asociadas a un contenido.
+	 *
+	 * @param idDeContenido (required)
+	 * @return Lista de etiquetas asociadas al contenido. (status code 200)
+	 */
+	@Operation(operationId = "etiquetasContenidoIdDeContenidoGet", summary = "Devuelve las etiquetas asociadas a un contenido.", tags = {"Etiquetas"}, responses = {@ApiResponse(responseCode = "200", description = "Lista de etiquetas asociadas al contenido.", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Etiqueta.class)))})})
+	@RequestMapping(method = RequestMethod.GET, value = "/etiquetas/contenido/{id_de_contenido}", produces = {"application/json"})
 
-    }
+	default ResponseEntity<List<Etiqueta>> etiquetasContenidoIdDeContenidoGet(@Parameter(name = "id_de_contenido", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_contenido") Integer idDeContenido) {
+		getRequest().ifPresent(request -> {
+			for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+				if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+					String exampleString = "[ { \"id_etiqueta\" : 0, \"nombre\" : \"nombre\" }, { \"id_etiqueta\" : 0, \"nombre\" : \"nombre\" } ]";
+					ApiUtil.setExampleResponse(request, "application/json", exampleString);
+					break;
+				}
+			}
+		});
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
+	}
 
-    /**
-     * POST /etiquetas/contenido/{id_de_contenido} : Asocia etiquetas a un contenido.
-     *
-     * @param idDeContenido  (required)
-     * @param etiqueta  (required)
-     * @return Etiquetas asociadas correctamente. (status code 200)
-     */
-    @Operation(
-        operationId = "etiquetasContenidoIdDeContenidoPost",
-        summary = "Asocia etiquetas a un contenido.",
-        tags = { "Etiquetas" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Etiquetas asociadas correctamente.")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/etiquetas/contenido/{id_de_contenido}",
-        consumes = { "application/json" }
-    )
-    
-    default ResponseEntity<Void> etiquetasContenidoIdDeContenidoPost(
-        @Parameter(name = "id_de_contenido", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_contenido") Integer idDeContenido,
-        @Parameter(name = "Etiqueta", description = "", required = true) @Valid @RequestBody List<@Valid Etiqueta> etiqueta
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	/**
+	 * POST /etiquetas/contenido/{id_de_contenido} : Asocia etiquetas a un contenido.
+	 *
+	 * @param idDeContenido (required)
+	 * @param etiqueta      (required)
+	 * @return Etiquetas asociadas correctamente. (status code 200)
+	 */
+	@Operation(operationId = "etiquetasContenidoIdDeContenidoPost", summary = "Asocia etiquetas a un contenido.", tags = {"Etiquetas"}, responses = {@ApiResponse(responseCode = "200", description = "Etiquetas asociadas correctamente.")})
+	@RequestMapping(method = RequestMethod.POST, value = "/etiquetas/contenido/{id_de_contenido}", consumes = {"application/json"})
 
-    }
+	default ResponseEntity<Void> etiquetasContenidoIdDeContenidoPost(@Parameter(name = "id_de_contenido", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_contenido") Integer idDeContenido, @Parameter(name = "Etiqueta", description = "", required = true) @Valid @RequestBody List<@Valid Etiqueta> etiqueta) {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+	}
 
 
-    /**
-     * GET /etiquetas : Devuelve todas las etiquetas.
-     *
-     * @return Lista de etiquetas devuelta correctamente. (status code 200)
-     */
-    @Operation(
-        operationId = "etiquetasGet",
-        summary = "Devuelve todas las etiquetas.",
-        tags = { "Etiquetas" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Lista de etiquetas devuelta correctamente.", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Etiqueta.class)))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/etiquetas",
-        produces = { "application/json" }
-    )
-    
-    default ResponseEntity<List<Etiqueta>> etiquetasGet(
-        
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"id_etiqueta\" : 0, \"nombre\" : \"nombre\" }, { \"id_etiqueta\" : 0, \"nombre\" : \"nombre\" } ]";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	/**
+	 * GET /etiquetas : Devuelve todas las etiquetas.
+	 *
+	 * @return Lista de etiquetas devuelta correctamente. (status code 200)
+	 */
+	@Operation(operationId = "etiquetasGet", summary = "Devuelve todas las etiquetas.", tags = {"Etiquetas"}, responses = {@ApiResponse(responseCode = "200", description = "Lista de etiquetas devuelta correctamente.", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Etiqueta.class)))})})
+	@RequestMapping(method = RequestMethod.GET, value = "/etiquetas", produces = {"application/json"})
 
-    }
+	default ResponseEntity<List<Etiqueta>> etiquetasGet(
+
+	) {
+		getRequest().ifPresent(request -> {
+			for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+				if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+					String exampleString = "[ { \"id_etiqueta\" : 0, \"nombre\" : \"nombre\" }, { \"id_etiqueta\" : 0, \"nombre\" : \"nombre\" } ]";
+					ApiUtil.setExampleResponse(request, "application/json", exampleString);
+					break;
+				}
+			}
+		});
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+	}
+
+	@Operation(summary = "Obtiene una etiqueta por su ID", description = "Devuelve la información de una etiqueta específica según el ID proporcionado.", tags = {"Etiquetas"})
+	@RequestMapping(value = "/etiquetas/{id_de_etiqueta}", produces = {"application/json"}, method = RequestMethod.GET)
+	default ResponseEntity<Etiqueta> etiquetasIdDeEtiquetaGet(@Parameter(in = ParameterIn.PATH, description = "", required = true, schema = @Schema()) @PathVariable("id_de_etiqueta") Integer idDeEtiqueta) {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	}
 
 
-    /**
-     * DELETE /etiquetas/{id_de_etiqueta} : Borra una etiqueta.
-     *
-     * @param idDeEtiqueta  (required)
-     * @return Etiqueta borrada correctamente. (status code 200)
-     */
-    @Operation(
-        operationId = "etiquetasIdDeEtiquetaDelete",
-        summary = "Borra una etiqueta.",
-        tags = { "Etiquetas" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Etiqueta borrada correctamente.")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/etiquetas/{id_de_etiqueta}"
-    )
-    
-    default ResponseEntity<Void> etiquetasIdDeEtiquetaDelete(
-        @Parameter(name = "id_de_etiqueta", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_etiqueta") String idDeEtiqueta
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	/**
+	 * DELETE /etiquetas/{id_de_etiqueta} : Borra una etiqueta.
+	 *
+	 * @param idDeEtiqueta (required)
+	 * @return Etiqueta borrada correctamente. (status code 200)
+	 */
+	@Operation(operationId = "etiquetasIdDeEtiquetaDelete", summary = "Borra una etiqueta.", tags = {"Etiquetas"}, responses = {@ApiResponse(responseCode = "200", description = "Etiqueta borrada correctamente.")})
+	@RequestMapping(method = RequestMethod.DELETE, value = "/etiquetas/{id_de_etiqueta}")
 
-    }
+	default ResponseEntity<Void> etiquetasIdDeEtiquetaDelete(@Parameter(name = "id_de_etiqueta", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_etiqueta") Integer idDeEtiqueta) {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+	}
 
 
-    /**
-     * PUT /etiquetas/{id_de_etiqueta} : Actualiza una etiqueta.
-     *
-     * @param idDeEtiqueta  (required)
-     * @param etiqueta  (required)
-     * @return Etiqueta actualizada correctamente. (status code 200)
-     */
-    @Operation(
-        operationId = "etiquetasIdDeEtiquetaPut",
-        summary = "Actualiza una etiqueta.",
-        tags = { "Etiquetas" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Etiqueta actualizada correctamente.")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/etiquetas/{id_de_etiqueta}",
-        consumes = { "application/json" }
-    )
-    
-    default ResponseEntity<Void> etiquetasIdDeEtiquetaPut(
-        @Parameter(name = "id_de_etiqueta", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_etiqueta") String idDeEtiqueta,
-        @Parameter(name = "Etiqueta", description = "", required = true) @Valid @RequestBody Etiqueta etiqueta
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	/**
+	 * PUT /etiquetas/{id_de_etiqueta} : Actualiza una etiqueta.
+	 *
+	 * @param idDeEtiqueta (required)
+	 * @param etiqueta     (required)
+	 * @return Etiqueta actualizada correctamente. (status code 200)
+	 */
+	@Operation(operationId = "etiquetasIdDeEtiquetaPut", summary = "Actualiza una etiqueta.", tags = {"Etiquetas"}, responses = {@ApiResponse(responseCode = "200", description = "Etiqueta actualizada correctamente.")})
+	@RequestMapping(method = RequestMethod.PUT, value = "/etiquetas/{id_de_etiqueta}", consumes = {"application/json"})
 
-    }
+	default ResponseEntity<Void> etiquetasIdDeEtiquetaPut(@Parameter(name = "id_de_etiqueta", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id_de_etiqueta") Integer idDeEtiqueta, @Parameter(name = "Etiqueta", description = "", required = true) @Valid @RequestBody Etiqueta etiqueta) {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+	}
 
 
-    /**
-     * POST /etiquetas : Crea una etiqueta nueva.
-     *
-     * @param etiqueta  (required)
-     * @return Etiqueta creada correctamente. (status code 201)
-     */
-    @Operation(
-        operationId = "etiquetasPost",
-        summary = "Crea una etiqueta nueva.",
-        tags = { "Etiquetas" },
-        responses = {
-            @ApiResponse(responseCode = "201", description = "Etiqueta creada correctamente.")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/etiquetas",
-        consumes = { "application/json" }
-    )
-    
-    default ResponseEntity<Void> etiquetasPost(
-        @Parameter(name = "Etiqueta", description = "", required = true) @Valid @RequestBody Etiqueta etiqueta
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	/**
+	 * POST /etiquetas : Crea una etiqueta nueva.
+	 *
+	 * @param etiqueta (required)
+	 * @return Etiqueta creada correctamente. (status code 201)
+	 */
+	@Operation(operationId = "etiquetasPost", summary = "Crea una etiqueta nueva.", tags = {"Etiquetas"}, responses = {@ApiResponse(responseCode = "201", description = "Etiqueta creada correctamente.")})
+	@RequestMapping(method = RequestMethod.POST, value = "/etiquetas", consumes = {"application/json"})
 
-    }
+	default ResponseEntity<Void> etiquetasPost(@Parameter(name = "Etiqueta", description = "", required = true) @Valid @RequestBody Etiqueta etiqueta) {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+	}
 
 }
