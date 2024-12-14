@@ -69,7 +69,7 @@ public class EtiquetasApiController implements EtiquetasApi {
 	@Override
 	public ResponseEntity<Void> etiquetasIdDeEtiquetaDelete(Integer id) {
 		// Obtener la lista de contenidos asociados a esta etiqueta usando el endpoint /contenidos/etiquetas
-		String url = "http://localhost:8081/StreamHub/contenidos/etiquetas";
+		String url = "http://contenidos:8080/StreamHub/contenidos/etiquetas";
 		ResponseEntity<List<Contenido>> responseEntity = restTemplate.exchange(UriComponentsBuilder.fromHttpUrl(url).queryParam("etiquetas", id).build().toUri(), HttpMethod.GET, null, new ParameterizedTypeReference<List<Contenido>>() {
 		});
 
